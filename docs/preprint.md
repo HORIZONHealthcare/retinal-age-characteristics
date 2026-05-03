@@ -72,10 +72,10 @@ For threshold-based metrics (**Fig. 5d**), off-the-shelf transfer dropped sensit
 <img src="exported_figs/fig-5.png" width="100%" alt="Figure 5">
 
 **Fig. 5. Generalisation across external cohorts: UK Biobank, BRSET and mBRSET.**
-Each external cohort is split 50/50 at the patient level, stratified by disease label; evaluations are reported on the local test split.
+Each external cohort is split 50/50 at the patient level, stratified by disease label; evaluations are reported on each cohort's own test split.
 **a.** External retinal age model performance. Hexbin density of estimated retinal age vs chronological age in each external cohort; the dashed line is identity. Per-cohort MAE, RMSE and mean RAG are annotated in each panel.
 **b.** Implied per-year odds-ratio curves. Curves derived from each cohort's externally-calibrated Age + RAG + Age × RAG logistic for the unhealthy outcome, plotted against chronological age. The AlzEye internal curve (grey) is reproduced for reference.
-**c–d.** Disease classification metrics across cohorts. Two logistic specifications (Age-only; Age + RAG + Age × RAG) are evaluated on each external cohort in two ways: off-the-shelf, applying the AlzEye-fit logistic without modification (and, for thresholded metrics, reusing the AlzEye internal Youden threshold of 0.742); and externally calibrated, refitting the logistic on the local training split and re-deriving the threshold as the local Youden point. The AlzEye internal cell uses off-the-shelf only (no recalibration on internal data). **c**, AUC. **d**, Sensitivity, specificity and F1 at the per-cell operating threshold. Dashed lines: AlzEye internal references. Error bars: 95% CI from a patient-level cluster bootstrap.
+**c–d.** Disease classification metrics across cohorts. Two logistic specifications (Age-only; Age + RAG + Age × RAG) are evaluated on each external cohort in two ways: off-the-shelf, applying the AlzEye-fit logistic without modification (and, for thresholded metrics, reusing the AlzEye internal Youden threshold of 0.742); and externally calibrated, refitting the logistic on each external cohort's own training split and re-deriving the threshold as the cohort-specific Youden point. The AlzEye internal cell uses off-the-shelf only (no recalibration on internal data). **c**, AUC. **d**, Sensitivity, specificity and F1 at the per-cell operating threshold. Dashed lines: AlzEye internal references. Error bars: 95% CI from a patient-level cluster bootstrap.
 
 ### Appendix
 

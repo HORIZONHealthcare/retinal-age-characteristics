@@ -81,15 +81,15 @@ Each external cohort is split 50/50 at the patient level, stratified by disease 
 
 <img src="exported_figs/supp/fig-1.png" width="100%" alt="Supplementary Figure 1">
 
-**Supplementary Fig. 1. AlzEye cohort assembly flow.** Filtering pipeline from the raw quality-scored images down to the analytic AlzEye cohort. The cohort is partitioned at the patient level into a retinal-age estimation subset (healthy patients only) used to train the retinal age model, and a disease-classification subset (healthy and unhealthy patients) used to fit and evaluate the downstream logistic associations. The val split of the disease-classification subset is reserved and excluded from all analyses; it is omitted from the diagram for clarity.
+**Supplementary Fig. 1. Data curation flowchart for the AlzEye dataset.** The dataset was filtered to retain only good-quality CFPs with age and confirmed disease records. The analytic cohort was then partitioned at the patient level into two non-overlapping subsets: a retinal-age estimation subset (healthy patients only) used to train the retinal age model, and a disease-classification subset (healthy and unhealthy patients) used to fit and evaluate the downstream logistic associations. The val split of the disease-classification subset is reserved and excluded from all analyses; it is omitted from the diagram for clarity.
 
 <img src="exported_figs/supp/fig-2.png" width="50%" alt="Supplementary Figure 2">
 
-**Supplementary Fig. 2. UK Biobank cohort assembly flow.** Quality- and disease-label filtering pipeline; the analytic UKB cohort is split 50/50 at the patient level, stratified by disease label, into a training split (used for external calibration) and a test split (used for evaluation).
+**Supplementary Fig. 2. Data curation flowchart for the UK Biobank (UKB) dataset.** The dataset was filtered to retain only good-quality CFPs with age and confirmed disease records. The analytic cohort was then split 50/50 at the patient level, stratified by disease label, into a training split (used only for external calibration) and a test split (used only for evaluation).
 
 <img src="exported_figs/supp/fig-3.png" width="100%" alt="Supplementary Figure 3">
 
-**Supplementary Fig. 3. BRSET and mBRSET cohort assembly flows.** **a.** BRSET filtering pipeline and patient-level 50/50 split, stratified by disease label. **b.** mBRSET filtering pipeline and patient-level 50/50 split, stratified by disease label. mBRSET shows a substantially smaller healthy-patient count per split than the other external cohorts.
+**Supplementary Fig. 3. Data curation flowchart for the BRSET and mBRSET datasets.** Each dataset was filtered to retain only good-quality CFPs with age and confirmed disease records, then split 50/50 at the patient level, stratified by disease label, into training and test splits used as in Supplementary Fig. 2. **a.** BRSET. **b.** mBRSET; mBRSET has a substantially smaller healthy-patient count per split than the other external cohorts.
 
 <img src="exported_figs/supp/fig-4.png" width="100%" alt="Supplementary Figure 4">
 

@@ -26,7 +26,7 @@ On the internal test set, the marginal age-adjusted mean RAG at age 65 was signi
 **Fig. 2. Internal retinal age prediction and association with disease on the AlzEye internal test set.**
 **a.** Training-set age distribution. Chronological age distribution of the retinal-age training set used to fit the retinal age model (1-year bins). Following previous works, the retinal age model is trained exclusively on healthy patients.
 **b.** Internal retinal age model performance. Hexbin density of estimated retinal age vs chronological age on the internal test set; the dashed line is identity. Annotated metrics: Mean Retinal Age Gap (RAG), Mean Absolute Error (MAE) and Root Mean Square Error (RMSE).
-**c.** Age-adjusted mean RAG by group. Marginal mean RAG predicted at age 65 for healthy patients and the four disease categories. Error bars: 95% confidence intervals (CIs) from a patient-level cluster bootstrap. *P*-values, reported in the panel, are from a Wald test on the group coefficient in a linear regression of RAG on age and group.
+**c.** Age-adjusted mean RAG by group. Marginal mean RAG predicted at age 65 for healthy patients and the four disease categories. Error bars: 95% confidence intervals (CIs) from a patient-level cluster bootstrap. *P*-values, reported in the panel, are computed from the same patient-level cluster bootstrap distribution of the difference in mean RAG between each disease group and the healthy reference.
 **d.** Association analysis. Logistic regression was performed with each disease label as the outcome and RAG as the only predictor; reported are Odds Ratios (OR) per +1 year increase in RAG and 95% CIs, with *P*-values from the Wald test.
 
 ### 3. Differential RTM by health status

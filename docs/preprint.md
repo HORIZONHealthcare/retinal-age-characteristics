@@ -26,7 +26,7 @@ On the internal test set, the marginal age-adjusted mean RAG at age 65 was signi
 **Fig. 2. Internal retinal age prediction and association with disease on the AlzEye internal test set.**
 **a.** Training-set age distribution. Chronological age distribution of the retinal-age training set used to fit the retinal age model (1-year bins). Following previous works, the retinal age model is trained exclusively on healthy patients.
 **b.** Internal retinal age model performance. Hexbin density of estimated retinal age vs chronological age on the internal test set; the dashed line is identity. Annotated metrics: Mean Retinal Age Gap (RAG), Mean Absolute Error (MAE) and Root Mean Square Error (RMSE).
-**c.** Age-adjusted mean RAG by group. Marginal mean RAG predicted at age 65 for healthy patients and the four disease categories. Error bars: 95% confidence intervals (CIs) from a patient-level cluster bootstrap. P-values for the difference in mean RAG between each disease group and the healthy reference are reported in the panel.
+**c.** Age-adjusted mean RAG by group. Marginal mean RAG predicted at age 65 for healthy patients and the four disease categories. Error bars: 95% confidence intervals (CIs) from a patient-level cluster bootstrap. *P*-values, reported in the panel, are from a Wald test on the group coefficient in a linear regression of RAG on age and group.
 **d.** Association analysis. Logistic regression was performed with each disease label as the outcome and RAG as the only predictor; reported are Odds Ratios (OR) per +1 year increase in RAG and 95% CIs, with *P*-values from the Wald test.
 
 ### 3. Differential RTM by health status
@@ -38,7 +38,7 @@ We next asked whether the differential slope between healthy and unhealthy group
 <img src="exported_figs/fig-3.png" width="100%" alt="Figure 3">
 
 **Fig. 3. Differential RTM by health status persists under linear, quadratic and training-distribution calibration.**
-All analyses are on the AlzEye internal test set.
+All analyses are on the AlzEye internal test set. Interaction *P*-values ($P_{\text{interaction}}$) are from a Wald test on the age × group coefficient in the corresponding linear regression of RAG on age, group and their interaction.
 **a.** Mean RAG vs chronological age stratified by health status (1-year bins). Shaded bands are 95% CIs from a patient-level cluster bootstrap.
 **b.** Group-wise linear regression of RAG on chronological age. Slopes are reported with 95% CIs and an interaction term tests whether the healthy and unhealthy slopes differ.
 **c.** Slope estimates and 95% CIs for healthy, unhealthy, and the three disease subcategories.

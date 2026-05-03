@@ -81,7 +81,7 @@ Each external cohort is split 50/50 at the patient level, stratified by disease 
 
 <img src="exported_figs/supp/fig-1.png" width="100%" alt="Supplementary Figure 1">
 
-**Supplementary Fig. 1. Data curation flowchart for the AlzEye dataset.** The dataset was filtered to retain only good-quality CFPs with age and confirmed disease records. The analytic cohort was then partitioned at the patient level into two non-overlapping subsets: a retinal-age estimation subset (healthy patients only) used to train the retinal age model, and a disease-classification subset (healthy and unhealthy patients) used to fit and evaluate the downstream logistic associations. The val split of the disease-classification subset is reserved and excluded from all analyses; it is omitted from the diagram for clarity.
+**Supplementary Fig. 1. Data curation flowchart for the AlzEye dataset.** The dataset was filtered to retain only good-quality CFPs with age and confirmed disease records. The analytic cohort was then partitioned at the patient level into two non-overlapping subsets: a retinal-age estimation subset (healthy patients only) used to train the retinal age model, and a disease-classification subset (healthy and unhealthy patients) used to fit and evaluate the downstream logistic associations.
 
 <img src="exported_figs/supp/fig-2.png" width="50%" alt="Supplementary Figure 2">
 

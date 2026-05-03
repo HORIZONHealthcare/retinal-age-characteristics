@@ -42,7 +42,7 @@ All analyses are on the AlzEye internal test set. Interaction *P*-values ($P_{\t
 **a.** Mean RAG vs chronological age stratified by health status (1-year bins). Shaded bands are 95% CIs from a patient-level cluster bootstrap.
 **b.** Group-wise linear regression of RAG on chronological age. Slopes are reported with 95% CIs and an interaction term tests whether the healthy and unhealthy slopes differ.
 **c.** Slope estimates and 95% CIs for healthy, unhealthy, and the three disease subcategories.
-**d–e.** Re-evaluation after applying a linear (d) or quadratic (e) age-calibrator fit on the healthy subset of the downstream training set (see body §3 for the fitted form).
+**d–e.** Re-evaluation after applying a linear (d) or quadratic (e) age-calibrator fit on the healthy subset of the downstream training set (see §3 for the fitted form).
 **f.** Training-distribution rebalancing. Original training-age distribution (left) and the uniform-age distribution obtained by inverse-frequency resampling (right) used for the balanced-training experiment.
 **g.** RAG–age relationship after re-training the retinal age model on the balanced training distribution.
 

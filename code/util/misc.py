@@ -1,8 +1,3 @@
-# Copyright (c) Meta Platforms, Inc. and affiliates.
-# All rights reserved.
-# Partly revised by YZ @UCL&Moorfields
-# --------------------------------------------------------
-
 import builtins
 import datetime
 import os
@@ -34,9 +29,6 @@ class SmoothedValue(object):
         self.total += value * n
 
     def synchronize_between_processes(self):
-        """
-        Warning: does not synchronize the deque!
-        """
         if not is_dist_avail_and_initialized():
             return
         t = torch.tensor([self.count, self.total], dtype=torch.float64, device='cuda')
@@ -162,9 +154,6 @@ class MetricLogger(object):
 
 
 def setup_for_distributed(is_master):
-    """
-    This function disables printing when not in master process
-    """
     builtin_print = builtins.print
 
     def print(*args, **kwargs):
@@ -172,7 +161,7 @@ def setup_for_distributed(is_master):
         force = force or (get_world_size() > 8)
         if is_master or force:
             now = datetime.datetime.now().time()
-            builtin_print('[{}] '.format(now), end='')  # print with time stamp
+            builtin_print('[{}] '.format(now), end='')
             builtin_print(*args, **kwargs)
 
     builtins.print = print
@@ -216,7 +205,6 @@ def init_distributed_mode(args):
         os.environ['LOCAL_RANK'] = str(args.gpu)
         os.environ['RANK'] = str(args.rank)
         os.environ['WORLD_SIZE'] = str(args.world_size)
-        # ["RANK", "WORLD_SIZE", "MASTER_ADDR", "MASTER_PORT", "LOCAL_RANK"]
     elif 'RANK' in os.environ and 'WORLD_SIZE' in os.environ:
         args.rank = int(os.environ["RANK"])
         args.world_size = int(os.environ['WORLD_SIZE'])
@@ -226,12 +214,11 @@ def init_distributed_mode(args):
         args.gpu = args.rank % torch.cuda.device_count()
     else:
         print('Not using distributed mode')
-        setup_for_distributed(is_master=True)  # hack
+        setup_for_distributed(is_master=True)
         args.distributed = False
         return
 
     args.distributed = True
-
     torch.cuda.set_device(args.gpu)
     args.dist_backend = 'nccl'
     print('| distributed init (rank {}): {}, gpu {}'.format(
@@ -253,7 +240,7 @@ class NativeScalerWithGradNormCount:
         if update_grad:
             if clip_grad is not None:
                 assert parameters is not None
-                self._scaler.unscale_(optimizer)  # unscale the gradients of optimizer's assigned params in-place
+                self._scaler.unscale_(optimizer)
                 norm = torch.nn.utils.clip_grad_norm_(parameters, clip_grad)
             else:
                 self._scaler.unscale_(optimizer)
@@ -288,25 +275,26 @@ def get_grad_norm_(parameters, norm_type: float = 2.0) -> torch.Tensor:
 
 
 def save_model(args, epoch, model, model_without_ddp, optimizer, loss_scaler, mode):
-    output_dir = Path(args.output_dir)
-    epoch_name = str(epoch)
-    os.makedirs(os.path.join(args.output_dir, args.task), exist_ok=True)
+    exp_dir = os.path.join(args.output_dir, args.exp_name)
+    os.makedirs(exp_dir, exist_ok=True)
     if loss_scaler is not None:
         if mode == 'best':
-            checkpoint_paths = [os.path.join(args.output_dir, args.task, 'checkpoint.pth')]
+            checkpoint_paths = [os.path.join(exp_dir, 'checkpoint.pth')]
         else:
-            checkpoint_paths = [os.path.join(args.output_dir, args.task, 'checkpoint-latest.pth')]
+            checkpoint_paths = [os.path.join(exp_dir, 'checkpoint-latest.pth')]
         for checkpoint_path in checkpoint_paths:
             if mode == 'best':
                 to_save = {
                     'model': model_without_ddp.state_dict(),
                     'epoch': epoch,
-                    'args': args, }
+                    'args': args,
+                }
             else:
                 if epoch == args.epochs - 1:
                     to_save = {
                         'model': model_without_ddp.state_dict(),
-                        'args': args, }
+                        'args': args,
+                    }
                 else:
                     to_save = {
                         'model': model_without_ddp.state_dict(),
@@ -315,18 +303,19 @@ def save_model(args, epoch, model, model_without_ddp, optimizer, loss_scaler, mo
                         'scaler': loss_scaler.state_dict(),
                         'args': args,
                     }
-
             save_on_master(to_save, checkpoint_path)
     else:
         if mode == 'best':
             to_save = {
                 'model': model_without_ddp.state_dict(),
-                'epoch': epoch, }
-            torch.save(to_save, os.path.join(args.output_dir, args.task, "checkpoint.pth"))
+                'epoch': epoch,
+            }
+            torch.save(to_save, os.path.join(exp_dir, "checkpoint.pth"))
         else:
             if epoch == args.epochs - 1:
                 to_save = {
-                    'model': model_without_ddp.state_dict(), }
+                    'model': model_without_ddp.state_dict(),
+                }
             else:
                 to_save = {
                     'model': model_without_ddp.state_dict(),
@@ -334,7 +323,7 @@ def save_model(args, epoch, model, model_without_ddp, optimizer, loss_scaler, mo
                     'epoch': epoch,
                     'args': args,
                 }
-            torch.save(to_save, os.path.join(args.output_dir, args.task, "checkpoint-latest.pth"))
+            torch.save(to_save, os.path.join(exp_dir, "checkpoint-latest.pth"))
 
 
 def load_model(args, model_without_ddp, optimizer, loss_scaler):
